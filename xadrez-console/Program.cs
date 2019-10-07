@@ -1,5 +1,6 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace xadrez_console
 {
@@ -10,6 +11,10 @@ namespace xadrez_console
             try
             {
                 var tab = new Tabuleiro(8, 8);
+
+                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
+                tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(1, 1));
+
                 Tela.ImprimirTabuleiro(tab);
             }
             catch (TabuleiroException e)
