@@ -11,15 +11,15 @@ namespace xadrez_console
             {
                 for (int j = 0; j < tab.Colunas; j++)
                 {
-                    if (tab.Peca(i, j) == null)
+                    if (tab.Peca(i, j) == null) //não tem peça
                     {
                         Console.Write("-");
                     }
-                    else
+                    else // tem peça
                     {
                         Console.Write(tab.Peca(i, j));
                     }
-                    if (j == tab.Colunas - 1)
+                    if (j == tab.Colunas - 1) //não é última linha
                     {
                         Console.Write(" ");
                     }
