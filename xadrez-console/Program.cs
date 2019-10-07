@@ -7,8 +7,15 @@ namespace xadrez_console
     {
         private static void Main()
         {
-            var tab = new Tabuleiro(8, 8);
-            Tela.ImprimirTabuleiro(tab);
+            try
+            {
+                var tab = new Tabuleiro(8, 8);
+                Tela.ImprimirTabuleiro(tab);
+            }
+            catch (TabuleiroException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
