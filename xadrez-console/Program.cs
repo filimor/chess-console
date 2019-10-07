@@ -1,12 +1,14 @@
 ﻿using System;
+using tabuleiro;
 
 namespace xadrez_console
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var P = new Posicao(3, 4);
+            Console.WriteLine($"Posição: {P}");
         }
     }
 }
