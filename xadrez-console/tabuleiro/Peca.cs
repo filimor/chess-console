@@ -1,6 +1,6 @@
 ﻿namespace tabuleiro
 {
-    class Peca
+    abstract class Peca
     {
         // protected set:
         // só pode ser acessada por ela e pelas subclasses
@@ -20,5 +20,7 @@
         {
             QtdMovimentos++;
         }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
