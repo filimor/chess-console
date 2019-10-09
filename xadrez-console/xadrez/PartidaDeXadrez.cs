@@ -5,27 +5,62 @@ namespace xadrez
 {
     class PartidaDeXadrez
     {
-        private int _turno;
-        private Cor _jogadorAtual;
-
+        public int Turno { get; private set; }
+        public Cor JogadorAtual { get; private set; }
         public Tabuleiro Tab { get; }
         public bool Terminada { get; }
 
         public PartidaDeXadrez()
         {
             Tab = new Tabuleiro(8, 8);
-            _turno = 1;
-            _jogadorAtual = Cor.Branca;
+            Turno = 1;
+            JogadorAtual = Cor.Branca;
             Terminada = false;
             ColocarPecas();
         }
 
-        public void ExecutaMovimento(Posicao origem, Posicao destino)
+        public void ExecutarMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.RetirarPeca(origem);
             p.IncrementarMovimentos();
             Peca pecaCapturada = Tab.RetirarPeca(destino);
             Tab.ColocarPeca(p, destino);
+        }
+
+        public void RealizarJogada(Posicao origem, Posicao destino)
+        {
+            ExecutarMovimento(origem, destino);
+            Turno++;
+            MudarJogador();
+        }
+
+        public void ValidarPosicaoOrigem(Posicao pos)
+        {
+            if(Tab.Peca(pos) == null)
+            {
+                throw new TabuleiroException("Não existe peça na posição escolhida.");
+            }
+            if(JogadorAtual != Tab.Peca(pos).Cor)
+            {
+                throw new TabuleiroException("A peça escolhida não é sua.");
+            }
+            if (!Tab.Peca(pos).ExistemMovimentosPossiveis())
+            {
+                throw new TabuleiroException("Não há movimentos possíveis para a peça escolhida.");
+            }
+        }
+
+        public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
+        {
+            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            {
+                throw new TabuleiroException("Posição de destino inválida.");
+            }
+        }
+
+        private void MudarJogador()
+        {
+            JogadorAtual = JogadorAtual == Cor.Branca ? Cor.Preta : Cor.Branca;
         }
 
         private void ColocarPecas()
