@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using tabuleiro;
 using xadrez;
 
@@ -6,11 +7,46 @@ namespace xadrez_console
 {
     class Tela
     {
-        public const ConsoleColor CORPRECABRANCA = ConsoleColor.White;
+        public const ConsoleColor CORPECABRANCA = ConsoleColor.White;
         public const ConsoleColor CORPECAPRETA = ConsoleColor.Yellow;
         public const ConsoleColor CORTABULEIRO = ConsoleColor.DarkGray;
         public const ConsoleColor CORDESTAQUE = ConsoleColor.DarkGreen;
         public const ConsoleColor CORFUNDO = ConsoleColor.Black;
+
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            ImprimirTabuleiro(partida.Tab);
+            Console.WriteLine();
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {partida.Turno}");
+            Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
+        }
+
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
+            Console.WriteLine("Peças capturadas:");
+            Console.Write("Brancas: ");
+            Console.ForegroundColor = CORPECABRANCA;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.ForegroundColor = CORTABULEIRO;
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            Console.ForegroundColor = CORPECAPRETA;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = CORTABULEIRO;
+            Console.WriteLine();
+        }
+
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach (Peca x in conjunto)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
 
         public static void ImprimirTabuleiro(Tabuleiro tab)
         {
@@ -72,7 +108,7 @@ namespace xadrez_console
             {
                 if (peca.Cor == Cor.Branca)
                 {
-                    Console.ForegroundColor = CORPRECABRANCA;
+                    Console.ForegroundColor = CORPECABRANCA;
                     Console.Write(peca + " ");
                 }
                 else
