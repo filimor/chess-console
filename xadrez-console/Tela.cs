@@ -5,7 +5,7 @@ using xadrez;
 
 namespace xadrez_console
 {
-    class Tela
+    static class Tela
     {
         public const ConsoleColor CORPECABRANCA = ConsoleColor.White;
         public const ConsoleColor CORPECAPRETA = ConsoleColor.Yellow;
@@ -20,11 +20,20 @@ namespace xadrez_console
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine($"Turno: {partida.Turno}");
-            Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
-            if (partida.Xeque)
+            if (!partida.Terminada)
             {
-                Console.WriteLine("XEQUE!");
+                Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
             }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine($"Vencedor: {partida.JogadorAtual}");
+            }
+            
         }
 
         public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)

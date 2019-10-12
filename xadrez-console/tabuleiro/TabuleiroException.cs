@@ -8,5 +8,13 @@ namespace tabuleiro
         {
 
         }
+
+        public TabuleiroException() : base()
+        {
+        }
+
+        public TabuleiroException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }
