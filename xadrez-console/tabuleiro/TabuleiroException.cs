@@ -8,7 +8,7 @@ namespace tabuleiro
         {
         }
 
-        public TabuleiroException() : base()
+        public TabuleiroException()
         {
         }
 
