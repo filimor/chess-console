@@ -2,11 +2,10 @@
 
 namespace xadrez
 {
-    class Cavalo : Peca
+    internal class Cavalo : Peca
     {
         public Cavalo(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
-
         }
 
         private bool PodeMover(Posicao pos)

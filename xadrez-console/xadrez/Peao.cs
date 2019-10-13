@@ -2,9 +2,9 @@
 
 namespace xadrez
 {
-    class Peao : Peca
+    internal class Peao : Peca
     {
-        private PartidaDeXadrez _partida;
+        private readonly PartidaDeXadrez _partida;
 
         public Peao(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
         {
@@ -14,7 +14,7 @@ namespace xadrez
         private bool ExisteInimigo(Posicao pos)
         {
             Peca p = Tab.Peca(pos);
-            return p != null || p.Cor != Cor;
+            return p != null && p.Cor != Cor;
         }
 
         private bool Livre(Posicao pos)
@@ -30,7 +30,7 @@ namespace xadrez
             if (Cor == Cor.Branca)
             {
                 pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-                if(Tab.PosicaoValida(pos) && Livre(pos))
+                if (Tab.PosicaoValida(pos) && Livre(pos))
                 {
                     mat[pos.Linha, pos.Coluna] = true;
                 }
@@ -54,7 +54,7 @@ namespace xadrez
                 if (Posicao.Linha == 3)
                 {
                     var esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
-                    if(Tab.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tab.Peca(esquerda) == _partida.VulneravelEnPassant)
+                    if (Tab.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tab.Peca(esquerda) == _partida.VulneravelEnPassant)
                     {
                         mat[esquerda.Linha - 1, esquerda.Coluna] = true;
                     }
@@ -65,7 +65,6 @@ namespace xadrez
                         mat[direita.Linha - 1, direita.Coluna] = true;
                     }
                 }
-
             }
             else
             {

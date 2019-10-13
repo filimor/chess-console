@@ -4,7 +4,8 @@ namespace xadrez
 {
     internal class Rei : Peca
     {
-        private PartidaDeXadrez _partida;
+        private readonly PartidaDeXadrez _partida;
+
         public Rei(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base(tab, cor)
         {
             _partida = partida;
@@ -84,7 +85,7 @@ namespace xadrez
             }
 
             // #jogadaespecial roque
-            if(QtdMovimentos==0 && !_partida.Xeque)
+            if (QtdMovimentos == 0 && !_partida.Xeque)
             {
                 // roquepequeno
                 var posT1 = new Posicao(Posicao.Linha, Posicao.Coluna + 3);
@@ -92,7 +93,7 @@ namespace xadrez
                 {
                     var p1 = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
                     var p2 = new Posicao(Posicao.Linha, Posicao.Coluna + 2);
-                    if(Tab.Peca(p1) ==null && Tab.Peca(p2) == null)
+                    if (Tab.Peca(p1) == null && Tab.Peca(p2) == null)
                     {
                         mat[Posicao.Linha, Posicao.Coluna + 2] = true;
                     }
@@ -111,7 +112,6 @@ namespace xadrez
                     }
                 }
             }
-
 
             return mat;
         }

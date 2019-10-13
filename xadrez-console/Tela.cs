@@ -5,7 +5,7 @@ using xadrez;
 
 namespace xadrez_console
 {
-    static class Tela
+    internal static class Tela
     {
         public const ConsoleColor CORPECABRANCA = ConsoleColor.White;
         public const ConsoleColor CORPECAPRETA = ConsoleColor.Yellow;
@@ -33,7 +33,6 @@ namespace xadrez_console
                 Console.WriteLine("XEQUEMATE!");
                 Console.WriteLine($"Vencedor: {partida.JogadorAtual}");
             }
-            
         }
 
         public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
@@ -100,7 +99,6 @@ namespace xadrez_console
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
-            
         }
 
         public static PosicaoXadrez LerPosicaoXadrez()

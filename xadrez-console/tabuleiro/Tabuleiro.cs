@@ -1,6 +1,6 @@
 ﻿namespace tabuleiro
 {
-    class Tabuleiro
+    internal class Tabuleiro
     {
         private readonly Peca[,] _pecas;
 
@@ -50,7 +50,6 @@
             Peca aux = Peca(pos);
             _pecas[pos.Linha, pos.Coluna] = null;
             return aux;
-
         }
 
         public bool PosicaoValida(Posicao pos)

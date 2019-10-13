@@ -2,11 +2,10 @@
 
 namespace xadrez
 {
-    class Torre : Peca
+    internal class Torre : Peca
     {
         public Torre(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
-
         }
 
         private bool PodeMover(Posicao pos)
@@ -22,10 +21,10 @@ namespace xadrez
 
             //acima
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while(Tab.PosicaoValida(pos) && PodeMover(pos))
+            while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 mat[pos.Linha, pos.Coluna] = true;
-                if (Tab.Peca(pos)!= null && Tab.Peca(pos).Cor != Cor)
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
@@ -75,6 +74,5 @@ namespace xadrez
         {
             return "T";
         }
-
     }
 }

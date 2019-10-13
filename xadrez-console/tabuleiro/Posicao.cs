@@ -1,6 +1,6 @@
 ﻿namespace tabuleiro
 {
-    class Posicao
+    internal class Posicao
     {
         // representa a posição de uma Peça no tabuleiro
 
@@ -12,6 +12,7 @@
             Linha = 0;
             Coluna = 0;
         }
+
         public Posicao(int linha, int coluna)
         {
             Linha = linha;

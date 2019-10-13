@@ -16,8 +16,6 @@ namespace xadrez_console
                 {
                     Console.Clear();
                     Tela.ImprimirPartida(partida);
-                    
-
 
                     Console.Write("\nOrigem: ");
                     Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
@@ -30,9 +28,7 @@ namespace xadrez_console
                     Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
                     partida.ValidarPosicaoDestino(origem, destino);
                     partida.RealizarJogada(origem, destino);
-
                 }
-                
             }
             catch (TabuleiroException e)
             {
