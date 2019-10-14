@@ -20,14 +20,14 @@ namespace xadrez_console
                         Tela.ImprimirPartida(partida);
 
                         Console.Write("\nOrigem: ");
-                        Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
+                        var origem = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoOrigem(origem);
                         bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
                         Console.Clear();
                         Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
 
                         Console.Write("\nDestino: ");
-                        Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
+                        var destino = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoDestino(origem, destino);
                         partida.RealizarJogada(origem, destino);
                     }

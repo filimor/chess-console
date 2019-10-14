@@ -69,7 +69,7 @@ namespace xadrez_console
                 for (int j = 0; j < tab.Colunas; j++)
                 {
                     ImprimirPeca(tab.Peca(i, j));
-                    if (j == tab.Colunas - 1) //não é última linha
+                    if (j <= tab.Colunas - 1) //não é última linha
                     {
                         Console.Write(" ");
                     }
@@ -91,7 +91,7 @@ namespace xadrez_console
 
                     ImprimirPeca(tab.Peca(i, j));
                     Console.BackgroundColor = CORFUNDO;
-                    if (j == tab.Colunas - 1) //não é última linha
+                    if (j <= tab.Colunas - 1) //não é última linha
                     {
                         Console.Write(" ");
                     }
@@ -111,21 +111,21 @@ namespace xadrez_console
 
         public static void ImprimirPeca(Peca peca)
         {
-            if (peca == null) //não tem peça
+            if (peca == null)
             {
-                Console.Write("- ");
+                Console.Write("-");
             }
-            else // tem peça
+            else
             {
                 if (peca.Cor == Cor.Branca)
                 {
                     Console.ForegroundColor = CORPECABRANCA;
-                    Console.Write(peca + " ");
+                    Console.Write(peca);
                 }
                 else
                 {
                     Console.ForegroundColor = CORPECAPRETA;
-                    Console.Write(peca + " ");
+                    Console.Write(peca);
                 }
             }
             Console.ForegroundColor = CORTABULEIRO;

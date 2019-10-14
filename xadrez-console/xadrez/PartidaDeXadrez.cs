@@ -5,24 +5,18 @@ namespace xadrez
 {
     internal class PartidaDeXadrez
     {
-        private readonly HashSet<Peca> _pecas;
-        private readonly HashSet<Peca> _capturadas;
+        private readonly HashSet<Peca> _pecas = new HashSet<Peca>();
+        private readonly HashSet<Peca> _capturadas = new HashSet<Peca>();
 
-        public int Turno { get; private set; }
+        public int Turno { get; private set; } = 1;
         public Cor JogadorAtual { get; private set; }
-        public Tabuleiro Tab { get; }
+        public Tabuleiro Tab { get; } = new Tabuleiro(8, 8);
         public bool Terminada { get; private set; }
         public bool Xeque { get; private set; }
         public Peca VulneravelEnPassant { get; private set; }
 
         public PartidaDeXadrez()
         {
-            Tab = new Tabuleiro(8, 8);
-            Turno = 1;
-            JogadorAtual = Cor.Branca;
-            Terminada = false;
-            _pecas = new HashSet<Peca>();
-            _capturadas = new HashSet<Peca>();
             ColocarPecas();
         }
 
@@ -270,7 +264,7 @@ namespace xadrez
 
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
-            Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).toPosicao());
+            Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).ToPosicao());
             _pecas.Add(peca);
         }
 

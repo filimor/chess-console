@@ -3,7 +3,6 @@
     internal class Tabuleiro
     {
         private readonly Peca[,] _pecas;
-
         public int Linhas { get; set; }
         public int Colunas { get; set; }
 

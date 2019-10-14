@@ -12,7 +12,6 @@
         {
             Tab = tab;
             Cor = cor;
-            QtdMovimentos = 0;
         }
 
         public void IncrementarMovimentos()
