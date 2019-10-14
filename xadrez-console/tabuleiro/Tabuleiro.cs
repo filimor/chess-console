@@ -20,6 +20,7 @@
 
         public Peca Peca(Posicao pos)
         {
+            ValidarPosicao(pos);
             return _pecas[pos.Linha, pos.Coluna];
         }
 

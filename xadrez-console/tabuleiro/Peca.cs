@@ -42,6 +42,7 @@
 
         public bool MovimentoPossivel(Posicao pos)
         {
+            Tab.ValidarPosicao(pos);
             return MovimentosPossiveis()[pos.Linha, pos.Coluna];
         }
 

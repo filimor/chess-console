@@ -1,4 +1,4 @@
-﻿using System;
+﻿using static System.Console;
 using tabuleiro;
 using xadrez;
 
@@ -16,34 +16,34 @@ namespace xadrez_console
                 {
                     try
                     {
-                        Console.Clear();
+                        Clear();
                         Tela.ImprimirPartida(partida);
 
-                        Console.Write("\nOrigem: ");
+                        Write("\nOrigem: ");
                         var origem = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoOrigem(origem);
                         bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
-                        Console.Clear();
+                        Clear();
                         Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
 
-                        Console.Write("\nDestino: ");
+                        Write("\nDestino: ");
                         var destino = Tela.LerPosicaoXadrez().ToPosicao();
                         partida.ValidarPosicaoDestino(origem, destino);
                         partida.RealizarJogada(origem, destino);
                     }
                     catch (TabuleiroException e)
                     {
-                        Console.WriteLine(e.Message);
-                        Console.ReadLine();
+                        WriteLine(e.Message);
+                        ReadLine();
                     }
                 }
             }
             catch (TabuleiroException e)
             {
-                Console.WriteLine(e.Message);
+                WriteLine(e.Message);
             }
 
-            Console.ReadLine();
+            ReadLine();
         }
     }
 }
