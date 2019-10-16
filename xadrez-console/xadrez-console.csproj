@@ -4,6 +4,24 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>xadrez_console</RootNamespace>
+    <StartupObject>xadrez_console.Program</StartupObject>
+    <AssemblyName>Jogo de Xadrez</AssemblyName>
+    <ApplicationIcon>Chess.ico</ApplicationIcon>
+    <Win32Resource />
+    <ApplicationManifest>auxiliar\xadrez-console.manifest</ApplicationManifest>
+    <NeutralLanguage>pt-BR</NeutralLanguage>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+  </ItemGroup>
 
 </Project>

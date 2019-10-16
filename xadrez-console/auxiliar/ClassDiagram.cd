@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="tabuleiro.Peca">
+    <Position X="8.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAgAAAAAAAAAAFAAQEAAAAAAAAIBEAAAAA=</HashCode>
+      <FileName>tabuleiro\Peca.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tabuleiro.Posicao">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAACAAAAEAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tabuleiro\Posicao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tabuleiro.Tabuleiro">
+    <Position X="18.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAEAAABAAAAAAAAQAEARAAAAAAAAAAEAA=</HashCode>
+      <FileName>tabuleiro\Tabuleiro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="tabuleiro.TabuleiroException">
+    <Position X="24.5" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tabuleiro\TabuleiroException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Bispo">
+    <Position X="0.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>xadrez\Bispo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Cavalo">
+    <Position X="7" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>xadrez\Cavalo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Dama">
+    <Position X="10.25" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>xadrez\Dama.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.PartidaDeXadrez">
+    <Position X="21.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>RhAQACQAICAgIgACAgAAAAAAAQCCQAAgAAAABAAQAgA=</HashCode>
+      <FileName>xadrez\PartidaDeXadrez.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Peao">
+    <Position X="13.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAFAAAAAAAAEAAAAAAAAAAIQAAAAAA=</HashCode>
+      <FileName>xadrez\Peao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.PosicaoXadrez">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAACAAAAEAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>xadrez\PosicaoXadrez.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Rei">
+    <Position X="16.75" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAEAAAAAAAAEQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>xadrez\Rei.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez.Torre">
+    <Position X="3.75" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>xadrez\Torre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez_console.Program">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="xadrez_console.Tela">
+    <Position X="24.5" Y="2" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AgoAAAAAAAAAAAAAAAAAAAAAAABCAAAAQAEAQAAAkgA=</HashCode>
+      <FileName>Tela.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="tabuleiro.Cor">
+    <Position X="14" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEAAAAAQAAAgAEAIAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>tabuleiro\Cor.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
