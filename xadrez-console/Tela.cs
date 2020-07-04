@@ -1,135 +1,131 @@
-﻿using System;
-using static System.Console;
+﻿using chess_console.board;
+using chess_console.chess;
+using System;
 using System.Collections.Generic;
-using tabuleiro;
-using xadrez;
+using static System.Console;
 
-namespace xadrez_console
+namespace chess_console
 {
-    internal static class Tela
+    public static class Tela
     {
-        public const ConsoleColor CORPECABRANCA = ConsoleColor.White;
-        public const ConsoleColor CORPECAPRETA = ConsoleColor.Yellow;
-        public const ConsoleColor CORTABULEIRO = ConsoleColor.DarkGray;
-        public const ConsoleColor CORDESTAQUE = ConsoleColor.DarkGreen;
-        public const ConsoleColor CORFUNDO = ConsoleColor.Black;
+        private const ConsoleColor WHITE_PIECE_COLOR = ConsoleColor.White;
+        private const ConsoleColor BLACK_PIECE_COLOR = ConsoleColor.Yellow;
+        private const ConsoleColor BOARD_COLOR = ConsoleColor.DarkGray;
+        private const ConsoleColor HIGHLIGHT_COLOR = ConsoleColor.DarkGreen;
+        private const ConsoleColor BACKGROUND_COLOR = ConsoleColor.Black;
 
-        public static void ImprimirPartida(PartidaDeXadrez partida)
+        public static void ShowMatch(ChessMatch match)
         {
-            ImprimirTabuleiro(partida.Tab);
+            ShowBoard(match.Tab);
             WriteLine();
-            ImprimirPecasCapturadas(partida);
+            ShowCapturedPieces(match);
             WriteLine();
-            WriteLine($"Turno: {partida.Turno}");
-            if (!partida.Terminada)
+            WriteLine($"Round: {match.Round}");
+            if (!match.Finished)
             {
-                WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
-                if (partida.Xeque)
-                {
-                    WriteLine("XEQUE!");
-                }
+                WriteLine($"Aguardando jogada: {match.CurrentPlayer}");
+                if (match.Check) WriteLine("XEQUE!");
             }
             else
             {
                 WriteLine("XEQUEMATE!");
-                WriteLine($"Vencedor: {partida.JogadorAtual}");
+                WriteLine($"Vencedor: {match.CurrentPlayer}");
             }
         }
 
-        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        public static void ShowCapturedPieces(ChessMatch match)
         {
             WriteLine("Peças capturadas:");
             Write("Brancas: ");
-            ForegroundColor = CORPECABRANCA;
-            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
-            ForegroundColor = CORTABULEIRO;
+            ForegroundColor = WHITE_PIECE_COLOR;
+            ShowHashSet(match.CapturedPieces(Color.White));
+            ForegroundColor = BOARD_COLOR;
             WriteLine();
             Write("Pretas: ");
-            ForegroundColor = CORPECAPRETA;
-            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
-            ForegroundColor = CORTABULEIRO;
+            ForegroundColor = BLACK_PIECE_COLOR;
+            ShowHashSet(match.CapturedPieces(Color.Black));
+            ForegroundColor = BOARD_COLOR;
             WriteLine();
         }
 
-        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        public static void ShowHashSet(HashSet<Piece> hashSet)
         {
             Write("[");
-            foreach (Peca x in conjunto)
-            {
-                Write(x + " ");
-            }
+            foreach (var piece in hashSet) Write(piece + " ");
             Write("]");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab)
+        public static void ShowBoard(Board tab)
         {
-            ForegroundColor = CORTABULEIRO;
-            for (int i = 0; i < tab.Linhas; i++)
+            ForegroundColor = BOARD_COLOR;
+            for (var i = 0; i < tab.Lines; i++)
             {
                 Write(8 - i + " ");
-                for (int j = 0; j < tab.Colunas; j++)
+                for (var j = 0; j < tab.Columns; j++)
                 {
-                    ImprimirPeca(tab.Peca(i, j));
-                    if (j <= tab.Colunas - 1) //não é última linha
-                    {
+                    ShowPiece(tab.Piece(i, j));
+                    if (j <= tab.Columns - 1) // It's not last line
                         Write(" ");
-                    }
                 }
+
                 WriteLine();
             }
+
             WriteLine("  a b c d e f g h");
         }
 
-        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
+        public static void ShowBoard(Board tab, bool[,] legalPositions)
         {
-            ForegroundColor = CORTABULEIRO;
-            for (int i = 0; i < tab.Linhas; i++)
+            ForegroundColor = BOARD_COLOR;
+            for (var i = 0; i < tab.Lines; i++)
             {
                 Write(8 - i + " ");
-                for (int j = 0; j < tab.Colunas; j++)
+                for (var j = 0; j < tab.Columns; j++)
                 {
-                    BackgroundColor = posicoesPossiveis[i, j] ? CORDESTAQUE : CORFUNDO;
+                    BackgroundColor = legalPositions[i, j] ? HIGHLIGHT_COLOR : BACKGROUND_COLOR;
 
-                    ImprimirPeca(tab.Peca(i, j));
-                    BackgroundColor = CORFUNDO;
-                    if (j <= tab.Colunas - 1) //não é última linha
-                    {
+                    ShowPiece(tab.Piece(i, j));
+                    BackgroundColor = BACKGROUND_COLOR;
+                    if (j <= tab.Columns - 1) // It's not last line
                         Write(" ");
-                    }
                 }
+
                 WriteLine();
             }
+
             WriteLine("  a b c d e f g h");
         }
 
-        public static PosicaoXadrez LerPosicaoXadrez()
+        public static ChessPosition ReadChessPosition()
         {
-            string str = ReadLine();
-            char coluna = str[0];
-            int.TryParse(str[1].ToString(), out int linha);
-            return new PosicaoXadrez(coluna, linha);
+            var str = ReadLine();
+            if (str == null) return null;
+            var column = str[0];
+            int.TryParse(str[1].ToString(), out var line);
+            return new ChessPosition(column, line);
         }
 
-        public static void ImprimirPeca(Peca peca)
+        public static void ShowPiece(Piece piece)
         {
-            if (peca == null)
+            if (piece == null)
             {
                 Write("-");
             }
             else
             {
-                if (peca.Cor == Cor.Branca)
+                if (piece.Color == Color.White)
                 {
-                    ForegroundColor = CORPECABRANCA;
-                    Write(peca);
+                    ForegroundColor = WHITE_PIECE_COLOR;
+                    Write(piece);
                 }
                 else
                 {
-                    ForegroundColor = CORPECAPRETA;
-                    Write(peca);
+                    ForegroundColor = BLACK_PIECE_COLOR;
+                    Write(piece);
                 }
             }
-            ForegroundColor = CORTABULEIRO;
+
+            ForegroundColor = BOARD_COLOR;
         }
     }
 }

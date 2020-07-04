@@ -1,8 +1,8 @@
-﻿using static System.Console;
-using tabuleiro;
-using xadrez;
+﻿using chess_console.board;
+using chess_console.chess;
+using static System.Console;
 
-namespace xadrez_console
+namespace chess_console
 {
     internal static class Program
     {
@@ -10,35 +10,35 @@ namespace xadrez_console
         {
             try
             {
-                var partida = new PartidaDeXadrez();
+                var partida = new ChessMatch();
 
-                while (!partida.Terminada)
+                while (!partida.Finished)
                 {
                     try
                     {
                         Clear();
-                        Tela.ImprimirPartida(partida);
+                        Tela.ShowMatch(partida);
 
                         Write("\nOrigem: ");
-                        var origem = Tela.LerPosicaoXadrez().ToPosicao();
-                        partida.ValidarPosicaoOrigem(origem);
-                        bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPossiveis();
+                        var origem = Tela.ReadChessPosition().ToPosition();
+                        partida.ValidateOriginPosition(origem);
+                        bool[,] posicoesPossiveis = partida.Tab.Piece(origem).LegalMoves();
                         Clear();
-                        Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
+                        Tela.ShowBoard(partida.Tab, posicoesPossiveis);
 
                         Write("\nDestino: ");
-                        var destino = Tela.LerPosicaoXadrez().ToPosicao();
-                        partida.ValidarPosicaoDestino(origem, destino);
-                        partida.RealizarJogada(origem, destino);
+                        var destino = Tela.ReadChessPosition().ToPosition();
+                        partida.ValidateDestinationPosition(origem, destino);
+                        partida.Play(origem, destino);
                     }
-                    catch (TabuleiroException e)
+                    catch (BoardException e)
                     {
                         WriteLine(e.Message);
                         ReadLine();
                     }
                 }
             }
-            catch (TabuleiroException e)
+            catch (BoardException e)
             {
                 WriteLine(e.Message);
             }
