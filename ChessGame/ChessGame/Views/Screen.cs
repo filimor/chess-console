@@ -1,12 +1,13 @@
-﻿using chess_console.board;
-using chess_console.chess;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using ChessGame.BoardElements;
+using ChessGame.ChessElements;
+using ChessGame.GameEngine;
 using static System.Console;
 
-namespace chess_console
+namespace ChessGame.Views
 {
-    public static class Tela
+    public static class Screen
     {
         private const ConsoleColor WHITE_PIECE_COLOR = ConsoleColor.White;
         private const ConsoleColor BLACK_PIECE_COLOR = ConsoleColor.Yellow;
@@ -20,28 +21,31 @@ namespace chess_console
             WriteLine();
             ShowCapturedPieces(match);
             WriteLine();
-            WriteLine($"Round: {match.Round}");
+            WriteLine(Resources.Screen_Round, match.Round);
             if (!match.Finished)
             {
-                WriteLine($"Aguardando jogada: {match.CurrentPlayer}");
-                if (match.Check) WriteLine("XEQUE!");
+                WriteLine(Resources.Screen_WaitingPlayer, ColorLocalized(match.CurrentPlayer));
+                if (match.Check)
+                {
+                    WriteLine(Resources.Screen_Check);
+                }
             }
             else
             {
-                WriteLine("XEQUEMATE!");
-                WriteLine($"Vencedor: {match.CurrentPlayer}");
+                WriteLine(Resources.Screen_Checkmate);
+                WriteLine(Resources.Screen_Winner, ColorLocalized(match.CurrentPlayer));
             }
         }
 
         public static void ShowCapturedPieces(ChessMatch match)
         {
-            WriteLine("Peças capturadas:");
-            Write("Brancas: ");
+            WriteLine(Resources.Screen_CapturedPieces);
+            Write(Resources.Screen_WhiteCaptured);
             ForegroundColor = WHITE_PIECE_COLOR;
             ShowHashSet(match.CapturedPieces(Color.White));
             ForegroundColor = BOARD_COLOR;
             WriteLine();
-            Write("Pretas: ");
+            Write(Resources.Screen_BlackCaptured);
             ForegroundColor = BLACK_PIECE_COLOR;
             ShowHashSet(match.CapturedPieces(Color.Black));
             ForegroundColor = BOARD_COLOR;
@@ -51,7 +55,11 @@ namespace chess_console
         public static void ShowHashSet(HashSet<Piece> hashSet)
         {
             Write("[");
-            foreach (var piece in hashSet) Write(piece + " ");
+            foreach (Piece piece in hashSet)
+            {
+                Write(piece + " ");
+            }
+
             Write("]");
         }
 
@@ -65,13 +73,15 @@ namespace chess_console
                 {
                     ShowPiece(tab.Piece(i, j));
                     if (j <= tab.Columns - 1) // It's not last line
+                    {
                         Write(" ");
+                    }
                 }
 
                 WriteLine();
             }
 
-            WriteLine("  a b c d e f g h");
+            WriteLine(Resources.Screen_Columns);
         }
 
         public static void ShowBoard(Board tab, bool[,] legalPositions)
@@ -87,21 +97,27 @@ namespace chess_console
                     ShowPiece(tab.Piece(i, j));
                     BackgroundColor = BACKGROUND_COLOR;
                     if (j <= tab.Columns - 1) // It's not last line
+                    {
                         Write(" ");
+                    }
                 }
 
                 WriteLine();
             }
 
-            WriteLine("  a b c d e f g h");
+            WriteLine(Resources.Screen_Columns);
         }
 
         public static ChessPosition ReadChessPosition()
         {
-            var str = ReadLine();
-            if (str == null) return null;
-            var column = str[0];
-            int.TryParse(str[1].ToString(), out var line);
+            string str = ReadLine();
+            if (str == null)
+            {
+                return null;
+            }
+
+            char column = str[0];
+            int.TryParse(str[1].ToString(), out int line);
             return new ChessPosition(column, line);
         }
 
@@ -126,6 +142,11 @@ namespace chess_console
             }
 
             ForegroundColor = BOARD_COLOR;
+        }
+
+        private static string ColorLocalized(Color color)
+        {
+            return color == Color.White ? Resources.Screen_White : Resources.Screen_Black;
         }
     }
 }

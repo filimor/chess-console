@@ -1,6 +1,6 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
     internal class Knight : Piece
     {
@@ -10,7 +10,7 @@ namespace chess_console.chess
 
         private bool CanMove(Position pos)
         {
-            var p = Tab.Piece(pos);
+            Piece p = Tab.Piece(pos);
             return p == null || p.Color != Color;
         }
 
@@ -72,7 +72,7 @@ namespace chess_console.chess
 
         public override string ToString()
         {
-            return "N";
+            return Resources.Knight;
         }
     }
 }

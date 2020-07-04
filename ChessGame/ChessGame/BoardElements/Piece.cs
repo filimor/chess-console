@@ -1,4 +1,4 @@
-﻿namespace chess_console.board
+﻿namespace ChessGame.BoardElements
 {
     public abstract class Piece
     {
@@ -26,7 +26,7 @@
 
         public bool CanMove()
         {
-            var mat = LegalMoves();
+            bool[,] mat = LegalMoves();
             for (var i = 0; i < Tab.Lines; i++)
             {
                 for (var j = 0; j < Tab.Columns; j++)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace chess_console.board
+namespace ChessGame.BoardElements
 {
     public class BoardException : Exception
     {

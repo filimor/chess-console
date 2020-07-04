@@ -1,4 +1,4 @@
-﻿namespace chess_console.board
+﻿namespace ChessGame.BoardElements
 {
     public class Board
     {
@@ -33,7 +33,10 @@
 
         public void PutPiece(Piece p, Position pos)
         {
-            if (ExistsPiece(pos)) throw new BoardException("Já existe uma peça nessa posição!");
+            if (ExistsPiece(pos))
+            {
+                throw new BoardException(Resources.Board_TheresAPiece);
+            }
 
             _pieces[pos.Line, pos.Column] = p;
             p.Position = pos;
@@ -41,9 +44,12 @@
 
         public Piece RemovePiece(Position pos)
         {
-            if (Piece(pos) == null) return null;
+            if (Piece(pos) == null)
+            {
+                return null;
+            }
 
-            var aux = Piece(pos);
+            Piece aux = Piece(pos);
             _pieces[pos.Line, pos.Column] = null;
             return aux;
         }
@@ -56,7 +62,10 @@
 
         public void ValidatePosition(Position pos)
         {
-            if (!LegalPosition(pos)) throw new BoardException("Posição inválida!");
+            if (!LegalPosition(pos))
+            {
+                throw new BoardException(Resources.Board_InvalidPosition);
+            }
         }
     }
 }

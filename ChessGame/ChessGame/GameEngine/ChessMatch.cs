@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using chess_console.board;
+using ChessGame.BoardElements;
+using ChessGame.ChessElements;
 
-namespace chess_console.chess
+namespace ChessGame.GameEngine
 {
     public class ChessMatch
     {
@@ -90,7 +91,7 @@ namespace chess_console.chess
 
             switch (p)
             {
-                // #jogadaespecial roque pequeno
+                // #SpecialMove Castling Short
                 case King _ when destination.Column == origin.Column + 2:
 
                     rookOrigin = new Position(origin.Line, origin.Column + 3);
@@ -99,7 +100,7 @@ namespace chess_console.chess
                     tempPiece.DecreaseMoves();
                     Tab.PutPiece(tempPiece, rookOrigin);
                     break;
-                // #jogadaespecial roque grande
+                // #SpecialMove Castling Long
                 case King _ when destination.Column == origin.Column - 2:
                 {
                     rookOrigin = new Position(origin.Line, origin.Column - 4);
@@ -109,7 +110,7 @@ namespace chess_console.chess
                     Tab.PutPiece(tempPiece, rookOrigin);
                     break;
                 }
-                // #jogadaespecial en passant
+                // #SpecialMove En Passant
                 case Pawn _ when origin.Column != destination.Column && capturedPiece == EnPassantVulnerable:
                 {
                     Piece pawn = Tab.RemovePiece(destination);
@@ -129,7 +130,7 @@ namespace chess_console.chess
             if (InCheck(CurrentPlayer))
             {
                 UndoMove(origin, destination, capturedPiece);
-                throw new BoardException("Você não pode se colocar em xeque!");
+                throw new BoardException(Resources.ChessMatch_AutoCheck);
             }
 
             Piece p = Tab.Piece(destination);
@@ -171,17 +172,17 @@ namespace chess_console.chess
         {
             if (Tab.Piece(pos) == null)
             {
-                throw new BoardException("Não existe peça na posição escolhida.");
+                throw new BoardException(Resources.ChessMatch_NoPiece);
             }
 
             if (CurrentPlayer != Tab.Piece(pos).Color)
             {
-                throw new BoardException("A peça escolhida não é sua.");
+                throw new BoardException(Resources.ChessMatch_NotYourPiece);
             }
 
             if (!Tab.Piece(pos).CanMove())
             {
-                throw new BoardException("Não há movimentos possíveis para a peça escolhida.");
+                throw new BoardException(Resources.ChessMatch_NoPossibleMoves);
             }
         }
 
@@ -189,7 +190,7 @@ namespace chess_console.chess
         {
             if (!Tab.Piece(origin).LegalMove(destination))
             {
-                throw new BoardException("Posição de destino inválida.");
+                throw new BoardException(Resources.ChessMatch_InvalidDestination);
             }
         }
 
@@ -248,7 +249,7 @@ namespace chess_console.chess
 
             foreach (Piece piece in PiecesInGame(color))
             {
-                var mat = piece.LegalMoves();
+                bool[,] mat = piece.LegalMoves();
                 for (var i = 0; i < Tab.Lines; i++)
                 {
                     for (var j = 0; j < Tab.Columns; j++)

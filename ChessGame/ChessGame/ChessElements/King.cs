@@ -1,6 +1,7 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
+using ChessGame.GameEngine;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
     internal class King : Piece
     {
@@ -13,13 +14,13 @@ namespace chess_console.chess
 
         private bool CanMove(Position pos)
         {
-            var p = Tab.Piece(pos);
+            Piece p = Tab.Piece(pos);
             return p == null || p.Color != Color;
         }
 
         private bool CastlingTest(Position pos)
         {
-            var p = Tab.Piece(pos);
+            Piece p = Tab.Piece(pos);
             return p is Rook && p.Color == Color && p.Moves == 0;
         }
 
@@ -30,38 +31,65 @@ namespace chess_console.chess
 
             //up
             pos.SetValues(Position.Line - 1, Position.Column);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //NE
             pos.SetValues(Position.Line - 1, Position.Column + 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //right
             pos.SetValues(Position.Line, Position.Column + 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //SE
             pos.SetValues(Position.Line + 1, Position.Column + 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //down
             pos.SetValues(Position.Line + 1, Position.Column);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //SO
             pos.SetValues(Position.Line + 1, Position.Column - 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //left
             pos.SetValues(Position.Line, Position.Column - 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             //NO
             pos.SetValues(Position.Line - 1, Position.Column - 1);
-            if (Tab.LegalPosition(pos) && CanMove(pos)) mat[pos.Line, pos.Column] = true;
+            if (Tab.LegalPosition(pos) && CanMove(pos))
+            {
+                mat[pos.Line, pos.Column] = true;
+            }
 
             // #SpecialMove Castling
-            if (Moves != 0 || _match.Check) return mat;
+            if (Moves != 0 || _match.Check)
+            {
+                return mat;
+            }
 
             // Castling Short
             var posT1 = new Position(Position.Line, Position.Column + 3);
@@ -69,7 +97,10 @@ namespace chess_console.chess
             {
                 var p1 = new Position(Position.Line, Position.Column + 1);
                 var p2 = new Position(Position.Line, Position.Column + 2);
-                if (Tab.Piece(p1) == null && Tab.Piece(p2) == null) mat[Position.Line, Position.Column + 2] = true;
+                if (Tab.Piece(p1) == null && Tab.Piece(p2) == null)
+                {
+                    mat[Position.Line, Position.Column + 2] = true;
+                }
             }
 
             // Castling Long
@@ -80,7 +111,9 @@ namespace chess_console.chess
                 var p2 = new Position(Position.Line, Position.Column - 2);
                 var p3 = new Position(Position.Line, Position.Column - 3);
                 if (Tab.Piece(p1) == null && Tab.Piece(p2) == null && Tab.Piece(p3) == null)
+                {
                     mat[Position.Line, Position.Column - 2] = true;
+                }
             }
 
             return mat;
@@ -88,7 +121,7 @@ namespace chess_console.chess
 
         public override string ToString()
         {
-            return "K";
+            return Resources.King;
         }
     }
 }

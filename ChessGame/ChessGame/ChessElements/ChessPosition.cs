@@ -1,17 +1,17 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
     public class ChessPosition
     {
-        public char Column { get; set; }
-        public int Line { get; set; }
-
         public ChessPosition(char column, int line)
         {
             Column = column;
             Line = line;
         }
+
+        public char Column { get; set; }
+        public int Line { get; set; }
 
         public Position ToPosition()
         {

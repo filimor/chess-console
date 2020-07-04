@@ -1,6 +1,6 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
     internal class Queen : Piece
     {
@@ -16,7 +16,7 @@ namespace chess_console.chess
 
         public override bool[,] LegalMoves()
         {
-            bool[,] mat = new bool[Tab.Lines, Tab.Columns];
+            var mat = new bool[Tab.Lines, Tab.Columns];
             var pos = new Position();
 
             //up
@@ -28,6 +28,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.Line--;
             }
 
@@ -40,6 +41,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.Line++;
             }
 
@@ -52,6 +54,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.Column++;
             }
 
@@ -64,6 +67,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.Column--;
             }
 
@@ -76,6 +80,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.SetValues(pos.Line - 1, pos.Column + 1);
             }
 
@@ -88,6 +93,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.SetValues(pos.Line + 1, pos.Column + 1);
             }
 
@@ -100,6 +106,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.SetValues(pos.Line + 1, pos.Column - 1);
             }
 
@@ -112,6 +119,7 @@ namespace chess_console.chess
                 {
                     break;
                 }
+
                 pos.SetValues(pos.Line - 1, pos.Column - 1);
             }
 
@@ -120,7 +128,7 @@ namespace chess_console.chess
 
         public override string ToString()
         {
-            return "Q";
+            return Resources.Queen;
         }
     }
 }

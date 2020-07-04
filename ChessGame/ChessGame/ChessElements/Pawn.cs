@@ -1,6 +1,7 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
+using ChessGame.GameEngine;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
     internal class Pawn : Piece
     {
@@ -13,7 +14,7 @@ namespace chess_console.chess
 
         private bool ExistsEnemy(Position pos)
         {
-            var p = Tab.Piece(pos);
+            Piece p = Tab.Piece(pos);
             return p != null && p.Color != Color;
         }
 
@@ -30,47 +31,87 @@ namespace chess_console.chess
             if (Color == Color.White)
             {
                 pos.SetValues(Position.Line - 1, Position.Column);
-                if (Tab.LegalPosition(pos) && FreePosition(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && FreePosition(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line - 2, Position.Column);
-                if (Tab.LegalPosition(pos) && FreePosition(pos) && Moves == 0) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && FreePosition(pos) && Moves == 0)
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line - 1, Position.Column - 1);
-                if (Tab.LegalPosition(pos) && ExistsEnemy(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && ExistsEnemy(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line - 1, Position.Column + 1);
-                if (Tab.LegalPosition(pos) && ExistsEnemy(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && ExistsEnemy(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
 
                 // #SpecialMove En Passant
                 if (Position.Line == 3)
                 {
                     var left = new Position(Position.Line, Position.Column - 1);
                     if (Tab.LegalPosition(left) && ExistsEnemy(left) && Tab.Piece(left) == _match.EnPassantVulnerable)
+                    {
                         mat[left.Line - 1, left.Column] = true;
+                    }
 
                     var right = new Position(Position.Line, Position.Column + 1);
                     if (Tab.LegalPosition(right) && ExistsEnemy(right) && Tab.Piece(right) == _match.EnPassantVulnerable
-                    ) mat[right.Line - 1, right.Column] = true;
+                    )
+                    {
+                        mat[right.Line - 1, right.Column] = true;
+                    }
                 }
             }
             else
             {
                 pos.SetValues(Position.Line + 1, Position.Column);
-                if (Tab.LegalPosition(pos) && FreePosition(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && FreePosition(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line + 2, Position.Column);
-                if (Tab.LegalPosition(pos) && FreePosition(pos) && Moves == 0) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && FreePosition(pos) && Moves == 0)
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line + 1, Position.Column - 1);
-                if (Tab.LegalPosition(pos) && ExistsEnemy(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && ExistsEnemy(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
+
                 pos.SetValues(Position.Line + 1, Position.Column + 1);
-                if (Tab.LegalPosition(pos) && ExistsEnemy(pos)) mat[pos.Line, pos.Column] = true;
+                if (Tab.LegalPosition(pos) && ExistsEnemy(pos))
+                {
+                    mat[pos.Line, pos.Column] = true;
+                }
 
                 // #SpecialMove En Passant
                 if (Position.Line == 4)
                 {
                     var left = new Position(Position.Line, Position.Column - 1);
                     if (Tab.LegalPosition(left) && ExistsEnemy(left) && Tab.Piece(left) == _match.EnPassantVulnerable)
+                    {
                         mat[left.Line + 1, left.Column] = true;
+                    }
 
                     var right = new Position(Position.Line, Position.Column + 1);
                     if (Tab.LegalPosition(right) && ExistsEnemy(right) && Tab.Piece(right) == _match.EnPassantVulnerable
-                    ) mat[right.Line + 1, right.Column] = true;
+                    )
+                    {
+                        mat[right.Line + 1, right.Column] = true;
+                    }
                 }
             }
 
@@ -79,7 +120,7 @@ namespace chess_console.chess
 
         public override string ToString()
         {
-            return "P";
+            return Resources.Pawn;
         }
     }
 }

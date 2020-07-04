@@ -1,16 +1,16 @@
-﻿using chess_console.board;
+﻿using ChessGame.BoardElements;
 
-namespace chess_console.chess
+namespace ChessGame.ChessElements
 {
-    internal class Bishop : Piece
+    internal class Rook : Piece
     {
-        public Bishop(Board tab, Color color) : base(tab, color)
+        public Rook(Board tab, Color color) : base(tab, color)
         {
         }
 
         private bool CanMove(Position pos)
         {
-            var p = Tab.Piece(pos);
+            Piece p = Tab.Piece(pos);
             return p == null || p.Color != Color;
         }
 
@@ -19,8 +19,8 @@ namespace chess_console.chess
             var mat = new bool[Tab.Lines, Tab.Columns];
             var pos = new Position();
 
-            //NE
-            pos.SetValues(Position.Line - 1, Position.Column + 1);
+            //up
+            pos.SetValues(Position.Line - 1, Position.Column);
             while (Tab.LegalPosition(pos) && CanMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
@@ -28,11 +28,12 @@ namespace chess_console.chess
                 {
                     break;
                 }
-                pos.SetValues(pos.Line - 1, pos.Column + 1);
+
+                pos.Line--;
             }
 
-            //SE
-            pos.SetValues(Position.Line + 1, Position.Column + 1);
+            //down
+            pos.SetValues(Position.Line + 1, Position.Column);
             while (Tab.LegalPosition(pos) && CanMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
@@ -40,11 +41,12 @@ namespace chess_console.chess
                 {
                     break;
                 }
-                pos.SetValues(pos.Line + 1, pos.Column + 1);
+
+                pos.Line++;
             }
 
-            //SO
-            pos.SetValues(Position.Line + 1, Position.Column - 1);
+            //right
+            pos.SetValues(Position.Line, Position.Column + 1);
             while (Tab.LegalPosition(pos) && CanMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
@@ -52,11 +54,12 @@ namespace chess_console.chess
                 {
                     break;
                 }
-                pos.SetValues(pos.Line + 1, pos.Column - 1);
+
+                pos.Column++;
             }
 
-            //NO
-            pos.SetValues(Position.Line - 1, Position.Column - 1);
+            //left
+            pos.SetValues(Position.Line, Position.Column - 1);
             while (Tab.LegalPosition(pos) && CanMove(pos))
             {
                 mat[pos.Line, pos.Column] = true;
@@ -64,7 +67,8 @@ namespace chess_console.chess
                 {
                     break;
                 }
-                pos.SetValues(pos.Line - 1, pos.Column - 1);
+
+                pos.Column--;
             }
 
             return mat;
@@ -72,7 +76,7 @@ namespace chess_console.chess
 
         public override string ToString()
         {
-            return "B";
+            return Resources.Rook;
         }
     }
 }
